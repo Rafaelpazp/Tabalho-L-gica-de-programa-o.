@@ -1,0 +1,93 @@
+listaPecas = []
+
+
+
+def cadastrarPeca(Código):
+
+    print('Você selecionou a opção de Cadastrar Peça.\n')
+    print('O codigo da peça a ser cadastrado é: {}' .format(Código))
+    nomePeca = input('Por favor entre com o nome da peça.\n')
+    fabricantePeca = input('Por favor entre com o fabricante da peça.\n')
+    valorPeca = input('Por favor entre com o valor(R$) da peça.\n')
+    dicionarioPeca = {'Código'   : Código,
+                      'nome'   : nomePeca,
+                      'Fabricante'   : fabricantePeca,
+                      'Valor'   : valorPeca}
+    listaPecas.append(dicionarioPeca.copy())
+    
+
+def consultarPeca():
+  while True:
+     try:
+      print('Você selecionou a opção de Consultar Peças.')
+      opConsultar = int(input('Escolha a opção desejada.\n'
+                               '1-Consultar todas as peças.\n'
+                               '2-Consultar peças por código.\n'
+                               '3-Consultar peças por fabricantes.\n'
+                               '4-Retornar\n'
+                               '>>'))
+      if opConsultar == 1:
+        print('Bem vindo a consultar todas as peças.')
+        for pecas in listaPecas: #Selecionar cada dicionário da minha lista(cada peça da lista de peças)
+          for key, value in pecas.items():#Selecionar cada conjunto chave/valor do dicionário (ex: 'nome' : Cambio)
+            print('{} : {}' .format(key, value))
+      elif opConsultar == 2:
+        print('Consultar peças por código.')
+        entrada = int(input('Digite o código da peça desejada.\n'))
+        for pecas in listaPecas:
+          if(pecas['Código'] == entrada):
+            for key, value in pecas.items():
+              print('{} : {}' .format(key, value))
+      elif opConsultar == 3:
+        print('Consultar peças por fabricantes')        
+        entrada = input('Digite o fabricante desejado.')
+        for pecas in listaPecas:
+          if(pecas['Fabricante'] == entrada):
+            for key, value in pecas.items():
+              print('{} : {}' .format(key, value))
+      elif opConsultar == 4:
+         break
+      else:
+        print('Pare de digitar números que não existem no menu.')
+        continue
+
+     except ValueError:
+       print('Para de digitar valores não inteiros')  
+def removerPeca():
+    print('Você selecionou a Remover Peça')
+    entrada = int(input('Digite o código que deseja remover.'))
+    for pecas in listaPecas:
+        if(pecas['Código'] == entrada):
+          listaPecas.remove(pecas)
+
+
+
+
+
+
+    # COMEÇO DA MAIN
+print('Bem vindo ao controle de estoque da bicicleta do Rafael Pereira.')
+contador = 0
+while True:
+  try:
+    opcao = int(input('Escolha a opção desejada.\n'
+                          '1-Cadastrar Peças.\n'
+                          '2-Consultar Peças.\n'
+                          '3-Remover Peças.\n'
+                          '4-Sair'
+                          '\n>>'))
+    if opcao == 1:
+            contador = contador + 1
+            cadastrarPeca(contador)
+    elif opcao == 2:
+            consultarPeca()
+    elif opcao == 3:
+            removerPeca()
+    elif opcao == 4:
+            print('Programa finalizado')
+            break
+    else:
+            print('Pare de digitar números que não existem no menu.')
+            continue
+  except:
+           print('Pare de digitar valores não inteiros')  
